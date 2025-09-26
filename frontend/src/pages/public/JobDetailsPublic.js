@@ -14,7 +14,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 const JobDetailsPublic = () => {
-  const { jobId } = useParams();
+  const { id } = useParams();
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -23,7 +23,7 @@ const JobDetailsPublic = () => {
     try {
       setLoading(true);
       setError('');
-      const data = await jobService.getPublicJob(jobId);
+      const data = await jobService.getPublicJob(id);
       setJob(data);
     } catch (err) {
       setError('Failed to load job details');
@@ -31,7 +31,7 @@ const JobDetailsPublic = () => {
     } finally {
       setLoading(false);
     }
-  }, [jobId]);
+  }, [id]);
 
   useEffect(() => {
     loadJob();

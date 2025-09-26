@@ -16,7 +16,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 const JobDetails = () => {
-  const { jobId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
   const [job, setJob] = useState(null);
@@ -27,7 +27,7 @@ const JobDetails = () => {
     try {
       setLoading(true);
       setError('');
-      const data = await jobService.getJob(jobId);
+      const data = await jobService.getJob(id);
       setJob(data);
     } catch (err) {
       setError('Failed to load job details');
@@ -35,7 +35,7 @@ const JobDetails = () => {
     } finally {
       setLoading(false);
     }
-  }, [jobId]);
+  }, [id]);
 
   useEffect(() => {
     loadJob();
@@ -47,7 +47,7 @@ const JobDetails = () => {
     }
 
     try {
-      await jobService.deleteJob(jobId);
+      await jobService.deleteJob(id);
       navigate('/jobs');
     } catch (err) {
       setError('Failed to delete job');

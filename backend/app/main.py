@@ -16,10 +16,9 @@ app = FastAPI(
 
 # Configure CORS
 origins = [
-    settings.react_app_api_url.replace(str(settings.api_port), str(settings.react_app_port)),
-    f"http://{settings.react_app_host}:{settings.react_app_port}",
-    f"http://127.0.0.1:{settings.react_app_port}",
-    f"http://{settings.api_host}:{settings.react_app_port}",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    f"http://{settings.api_host}:3000",
 ]
 
 app.add_middleware(

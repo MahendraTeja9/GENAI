@@ -17,7 +17,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 const ApplicationDetails = () => {
-  const { applicationId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
   const [application, setApplication] = useState(null);
@@ -29,7 +29,7 @@ const ApplicationDetails = () => {
     try {
       setLoading(true);
       setError('');
-      const data = await applicationService.getApplication(applicationId);
+      const data = await applicationService.getApplication(id);
       setApplication(data);
     } catch (err) {
       setError('Failed to load application details');
@@ -37,7 +37,7 @@ const ApplicationDetails = () => {
     } finally {
       setLoading(false);
     }
-  }, [applicationId]);
+  }, [id]);
 
   useEffect(() => {
     loadApplication();
@@ -46,7 +46,7 @@ const ApplicationDetails = () => {
   const handleStatusUpdate = async (newStatus) => {
     try {
       setUpdating(true);
-      await applicationService.updateApplicationStatus(applicationId, newStatus);
+      await applicationService.updateApplicationStatus(id, newStatus);
       await loadApplication(); // Reload data
     } catch (err) {
       setError('Failed to update application status');

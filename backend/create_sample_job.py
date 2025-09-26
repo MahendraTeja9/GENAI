@@ -10,7 +10,6 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from app.database import SessionLocal
 from app.models.job import Job
 from app.models.user import User
-from app.config import settings
 from datetime import datetime
 
 def create_sample_job():
@@ -105,7 +104,7 @@ We are seeking a talented Senior Frontend Developer to join our dynamic team at 
         print(f"   Job ID: {sample_job.id}")
         print(f"   Title: {sample_job.title}")
         print(f"   Status: {sample_job.status}")
-        print(f"\nYou can now visit http://{settings.react_app_host}:{settings.react_app_port}/careers to see the job listing!")
+        print("\nYou can now visit http://localhost:3000/careers to see the job listing!")
         
     except Exception as e:
         print(f"❌ Error creating sample job: {e}")

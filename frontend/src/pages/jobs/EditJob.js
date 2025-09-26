@@ -9,7 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 const EditJob = () => {
-  const { jobId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
@@ -39,7 +39,7 @@ const EditJob = () => {
     try {
       setLoading(true);
       setError('');
-      const job = await jobService.getJob(jobId);
+      const job = await jobService.getJob(id);
       
       // Check permissions
       if (user?.user_type !== 'admin' && 
@@ -71,7 +71,7 @@ const EditJob = () => {
     } finally {
       setLoading(false);
     }
-  }, [jobId, user?.user_type, user?.id]);
+  }, [id, user?.user_type, user?.id]);
 
   useEffect(() => {
     loadJob();
@@ -113,12 +113,12 @@ const EditJob = () => {
         deadline: formData.deadline || null
       };
 
-      await jobService.updateJob(jobId, jobData);
+      await jobService.updateJob(id, jobData);
       setSuccess('Job updated successfully!');
       
       // Navigate back to job details after a brief delay
       setTimeout(() => {
-        navigate(`/jobs/${jobId}`);
+        navigate(`/jobs/${id}`);
       }, 1500);
     } catch (err) {
       setError('Failed to update job. Please try again.');
@@ -132,7 +132,7 @@ const EditJob = () => {
     return (
       <div className="space-y-6">
         <div className="flex items-center">
-          <button onClick={() => navigate(`/jobs/${jobId}`)} className="mr-4">
+          <button onClick={() => navigate(`/jobs/${id}`)} className="mr-4">
             <ArrowLeftIcon className="h-6 w-6 text-gray-600" />
           </button>
           <div>
@@ -173,7 +173,7 @@ const EditJob = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <button onClick={() => navigate(`/jobs/${jobId}`)} className="mr-4">
+          <button onClick={() => navigate(`/jobs/${id}`)} className="mr-4">
             <ArrowLeftIcon className="h-6 w-6 text-gray-600 hover:text-gray-800" />
           </button>
           <div>
@@ -465,7 +465,7 @@ const EditJob = () => {
                 
                 <button
                   type="button"
-                  onClick={() => navigate(`/jobs/${jobId}`)}
+                  onClick={() => navigate(`/jobs/${id}`)}
                   className="w-full btn-secondary"
                 >
                   Cancel

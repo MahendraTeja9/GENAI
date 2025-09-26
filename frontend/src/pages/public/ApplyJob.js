@@ -11,7 +11,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 const ApplyJob = () => {
-  const { jobId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -33,7 +33,7 @@ const ApplyJob = () => {
     try {
       setLoading(true);
       setError('');
-      const data = await jobService.getPublicJob(jobId);
+      const data = await jobService.getPublicJob(id);
       setJob(data);
     } catch (err) {
       setError('Failed to load job details');
@@ -41,7 +41,7 @@ const ApplyJob = () => {
     } finally {
       setLoading(false);
     }
-  }, [jobId]);
+  }, [id]);
 
   useEffect(() => {
     loadJob();
@@ -101,7 +101,7 @@ const ApplyJob = () => {
 
       // Create FormData for file upload
       const submitData = new FormData();
-      submitData.append('job_id', jobId);
+      submitData.append('job_id', id);
       submitData.append('candidate_name', formData.candidate_name);
       submitData.append('candidate_email', formData.candidate_email);
       submitData.append('candidate_phone', formData.candidate_phone || '');
